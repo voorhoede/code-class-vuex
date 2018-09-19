@@ -9775,9 +9775,9 @@ var __vue_render__$4 = function() {
         on: { deleteItem: _vm.onDeleteItem }
       }),
       _vm._v(" "),
-      _vm.adding ? _c("grocery-input", { on: { add: _vm.onAdd } }) : _vm._e(),
-      _vm._v(" "),
-      _c("button", { on: { click: _vm.onClick } }, [_vm._v("Add grocery")])
+      _vm.adding
+        ? _c("grocery-input", { on: { add: _vm.onAdd } })
+        : _c("button", { on: { click: _vm.onClick } }, [_vm._v("Add grocery")])
     ],
     1
   )
@@ -9788,7 +9788,7 @@ __vue_render__$4._withStripped = true;
   /* style */
   const __vue_inject_styles__$4 = function (inject) {
     if (!inject) return
-    inject("data-v-7058403e_0", { source: "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", map: {"version":3,"sources":[],"names":[],"mappings":"","file":"App.vue"}, media: undefined });
+    inject("data-v-b7fab3c8_0", { source: "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", map: {"version":3,"sources":[],"names":[],"mappings":"","file":"App.vue"}, media: undefined });
 
   };
   /* scoped */

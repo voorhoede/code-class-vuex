@@ -3,7 +3,7 @@
         <input type="checkbox" v-model="orderByName"> Order by name<br>
         <grocery-list @deleteItem="onDeleteItem" :items="orderedItems"></grocery-list>
         <grocery-input v-if="adding" @add="onAdd"></grocery-input>
-        <button @click="onClick">Add grocery</button>
+        <button v-else @click="onClick">Add grocery</button>
     </div>
 </template>
 
