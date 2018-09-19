@@ -8928,9 +8928,25 @@ var index_esm = {
 };
 
 var store = new index_esm.Store({
-    state: {
-
-    },
+    modules: {
+        groceries: {
+            state: {
+                items: [
+                    {
+                        id: 1,
+                        name: 'Milk',
+                    },
+    
+                    {
+                        id: 2,
+                        name: 'Bread',
+                    }
+                ],
+                adding: false,
+                orderByName: false,
+            }
+        },
+    }
 });
 
 //
@@ -9915,8 +9931,6 @@ __vue_render__$4._withStripped = true;
     __vue_create_injector__$4,
     undefined
   );
-
-Vue.use(index_esm);
 
 const app = new Vue({
     store,
