@@ -17,6 +17,10 @@ export default new Vuex.Store({
                 ],
                 adding: false,
                 orderByName: false,
+            },
+
+            mutations: {
+                
             }
         },
     }
