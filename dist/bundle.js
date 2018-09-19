@@ -9708,7 +9708,7 @@ var script$4 = {
     },
 
     methods: {
-        onClick() {
+        onClickAdd() {
             this.adding = true;
         },
 
@@ -9791,7 +9791,9 @@ var __vue_render__$4 = function() {
       _vm._v(" "),
       _vm.adding
         ? _c("grocery-input", { on: { add: _vm.onAdd } })
-        : _c("button", { on: { click: _vm.onClick } }, [_vm._v("Add grocery")])
+        : _c("button", { on: { click: _vm.onClickAdd } }, [
+            _vm._v("Add grocery")
+          ])
     ],
     1
   )
@@ -9802,7 +9804,7 @@ __vue_render__$4._withStripped = true;
   /* style */
   const __vue_inject_styles__$4 = function (inject) {
     if (!inject) return
-    inject("data-v-6127844d_0", { source: "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", map: {"version":3,"sources":[],"names":[],"mappings":"","file":"App.vue"}, media: undefined });
+    inject("data-v-3ba69ab6_0", { source: "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", map: {"version":3,"sources":[],"names":[],"mappings":"","file":"App.vue"}, media: undefined });
 
   };
   /* scoped */
