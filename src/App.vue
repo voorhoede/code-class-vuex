@@ -14,13 +14,6 @@ import GrocerySearch from './components/GrocerySearch';
 import { mapState } from 'vuex';
 
 export default {
-    data() {
-        return {
-            items : [],
-            adding: false,
-            orderByName: false,
-        }
-    },
 
     computed: {
         orderedItems() {
@@ -30,6 +23,11 @@ export default {
         },
 
         //use mapState to get items, adding and orderByName from the store
+        ...mapState({
+            items: (state) => state.groceries.items,
+            adding: (state) => state.groceries.adding,
+            orderByName: (state) => state.groceries.orderByName,
+        }),
     },
 
     methods: {

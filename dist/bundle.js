@@ -8928,9 +8928,25 @@ var index_esm = {
 };
 
 var store = new index_esm.Store({
-    state: {
-
-    },
+    modules: {
+        groceries: {
+            state: {
+                items: [
+                    {
+                        id: 1,
+                        name: 'Milk',
+                    },
+    
+                    {
+                        id: 2,
+                        name: 'Bread',
+                    }
+                ],
+                adding: false,
+                orderByName: false,
+            }
+        },
+    }
 });
 
 //
@@ -9675,13 +9691,6 @@ __vue_render__$3._withStripped = true;
 //
 
 var script$4 = {
-    data() {
-        return {
-            items : [],
-            adding: false,
-            orderByName: false,
-        }
-    },
 
     computed: {
         orderedItems() {
@@ -9691,6 +9700,11 @@ var script$4 = {
         },
 
         //use mapState to get items, adding and orderByName from the store
+        ...mapState({
+            items: (state) => state.groceries.items,
+            adding: (state) => state.groceries.adding,
+            orderByName: (state) => state.groceries.orderByName,
+        }),
     },
 
     methods: {
@@ -9788,7 +9802,7 @@ __vue_render__$4._withStripped = true;
   /* style */
   const __vue_inject_styles__$4 = function (inject) {
     if (!inject) return
-    inject("data-v-b7fab3c8_0", { source: "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", map: {"version":3,"sources":[],"names":[],"mappings":"","file":"App.vue"}, media: undefined });
+    inject("data-v-6127844d_0", { source: "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", map: {"version":3,"sources":[],"names":[],"mappings":"","file":"App.vue"}, media: undefined });
 
   };
   /* scoped */
@@ -9915,8 +9929,6 @@ __vue_render__$4._withStripped = true;
     __vue_create_injector__$4,
     undefined
   );
-
-Vue.use(index_esm);
 
 const app = new Vue({
     store,

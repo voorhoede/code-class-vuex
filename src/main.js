@@ -4,8 +4,6 @@ import store from './store/index';
 
 import App from './App.vue';
 
-Vue.use(Vuex);
-
 const app = new Vue({
     store,
     components: {
