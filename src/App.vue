@@ -3,7 +3,7 @@
         <input type="checkbox" v-model="orderByName"> Order by name<br>
         <grocery-list @deleteItem="onDeleteItem" :items="orderedItems"></grocery-list>
         <grocery-input v-if="adding" @add="onAdd"></grocery-input>
-        <button v-else @click="onClick">Add grocery</button>
+        <button v-else @click="onClickAdd">Add grocery</button>
     </div>
 </template>
 
@@ -11,7 +11,7 @@
 import GroceryList from './components/GroceryList';
 import GroceryInput from './components/GroceryInput';
 import GrocerySearch from './components/GrocerySearch';
-import { mapState } from 'vuex';
+import { mapState, mapMutations } from 'vuex';
 
 export default {
 
@@ -31,7 +31,11 @@ export default {
     },
 
     methods: {
-        onClick() {
+        //replace the onClickAdd, onAdd and onDeleteItem methods by mutations
+        //bonus: convert the order by name functionality to a mutation :-)
+        ...mapMutations([]),
+
+        onClickAdd() {
             this.adding = true;
         },
 
