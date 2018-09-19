@@ -1,9 +1,9 @@
 <template>
     <div>
         <input type="checkbox" v-model="orderByName"> Order by name<br>
-        <grocery-list @deleteItem="onDeleteItem" :items="orderedItems"></grocery-list>
-        <grocery-input v-if="adding" @add="onAdd"></grocery-input>
-        <button v-else @click="onClick">Add grocery</button>
+        <grocery-list @deleteItem="deleteItem" :items="orderedItems"></grocery-list>
+        <grocery-input v-if="adding" @add="addItem"></grocery-input>
+        <button v-else @click="setAdding(true)">Add grocery</button>
     </div>
 </template>
 
@@ -11,7 +11,7 @@
 import GroceryList from './components/GroceryList';
 import GroceryInput from './components/GroceryInput';
 import GrocerySearch from './components/GrocerySearch';
-import { mapState } from 'vuex';
+import { mapState, mapMutations } from 'vuex';
 
 export default {
 
@@ -26,28 +26,24 @@ export default {
         ...mapState({
             items: (state) => state.groceries.items,
             adding: (state) => state.groceries.adding,
-            orderByName: (state) => state.groceries.orderByName,
         }),
+
+        orderByName: {
+            get() {
+                return this.$store.state.groceries.orderByName;
+            },
+            set(value) {
+                this.$store.commit('toggleOrderByName', value);
+            }
+        }
     },
 
     methods: {
-        onClick() {
-            this.adding = true;
-        },
-
-        onAdd(text) {
-            if(!text) {
-                return;
-            }
-            this.items.push({
-                id: this.items.length,
-                name: text,
-            });
-        },
-
-        onDeleteItem(id) {
-            this.items = this.items.filter(item => item.id !== id);
-        }
+        ...mapMutations([
+            'setAdding',
+            'addItem',
+            'deleteItem'
+        ]),
     },
 
     components: {

@@ -8933,12 +8933,12 @@ var store = new index_esm.Store({
             state: {
                 items: [
                     {
-                        id: 1,
+                        id: 0,
                         name: 'Milk',
                     },
     
                     {
-                        id: 2,
+                        id: 1,
                         name: 'Bread',
                     }
                 ],
@@ -8947,7 +8947,27 @@ var store = new index_esm.Store({
             },
 
             mutations: {
-                
+                setAdding(state, value) {
+                    state.adding = value;
+                },
+
+                addItem(state, text) {
+                    if(!text) {
+                        return;
+                    }
+                    state.items.push({
+                        id: state.items.length,
+                        name: text,
+                    });
+                },
+
+                deleteItem(state, id) {
+                    state.items = state.items.filter(item => item.id !== id);
+                },
+
+                toggleOrderByName(state, value) {
+                    state.orderByName = value;
+                }
             }
         },
     }
@@ -9707,28 +9727,24 @@ var script$4 = {
         ...mapState({
             items: (state) => state.groceries.items,
             adding: (state) => state.groceries.adding,
-            orderByName: (state) => state.groceries.orderByName,
         }),
+
+        orderByName: {
+            get() {
+                return this.$store.state.groceries.orderByName;
+            },
+            set(value) {
+                this.$store.commit('toggleOrderByName', value);
+            }
+        }
     },
 
     methods: {
-        onClick() {
-            this.adding = true;
-        },
-
-        onAdd(text) {
-            if(!text) {
-                return;
-            }
-            this.items.push({
-                id: this.items.length,
-                name: text,
-            });
-        },
-
-        onDeleteItem(id) {
-            this.items = this.items.filter(item => item.id !== id);
-        }
+        ...mapMutations([
+            'setAdding',
+            'addItem',
+            'deleteItem'
+        ]),
     },
 
     components: {
@@ -9790,12 +9806,22 @@ var __vue_render__$4 = function() {
       _vm._v(" "),
       _c("grocery-list", {
         attrs: { items: _vm.orderedItems },
-        on: { deleteItem: _vm.onDeleteItem }
+        on: { deleteItem: _vm.deleteItem }
       }),
       _vm._v(" "),
       _vm.adding
-        ? _c("grocery-input", { on: { add: _vm.onAdd } })
-        : _c("button", { on: { click: _vm.onClick } }, [_vm._v("Add grocery")])
+        ? _c("grocery-input", { on: { add: _vm.addItem } })
+        : _c(
+            "button",
+            {
+              on: {
+                click: function($event) {
+                  _vm.setAdding(true);
+                }
+              }
+            },
+            [_vm._v("Add grocery")]
+          )
     ],
     1
   )
@@ -9806,7 +9832,7 @@ __vue_render__$4._withStripped = true;
   /* style */
   const __vue_inject_styles__$4 = function (inject) {
     if (!inject) return
-    inject("data-v-6127844d_0", { source: "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", map: {"version":3,"sources":[],"names":[],"mappings":"","file":"App.vue"}, media: undefined });
+    inject("data-v-d799cef6_0", { source: "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", map: {"version":3,"sources":[],"names":[],"mappings":"","file":"App.vue"}, media: undefined });
 
   };
   /* scoped */
