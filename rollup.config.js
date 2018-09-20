@@ -8,7 +8,8 @@ export default {
     input: 'src/main.js',
     output: {
         file: 'dist/bundle.js',
-        format: 'cjs'
+        format: 'cjs',
+        sourcemap: true,
     },
     plugins: [
         vue(),
