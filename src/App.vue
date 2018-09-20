@@ -16,7 +16,18 @@ import { mapState } from 'vuex';
 export default {
     data() {
         return {
-            items : [],
+            // move this state to the store
+            items: [
+                {
+                    id: 1,
+                    name: 'Milk',
+                },
+
+                {
+                    id: 2,
+                    name: 'Bread',
+                }
+            ],
             adding: false,
             orderByName: false,
         }
