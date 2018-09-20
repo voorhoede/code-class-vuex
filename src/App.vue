@@ -2,7 +2,7 @@
     <div>
         <input type="checkbox" v-model="orderByName"> Order by name<br>
         <grocery-list @deleteItem="deleteItem" :items="orderedItems"></grocery-list>
-        <grocery-input v-if="adding" @add="addItem"></grocery-input>
+        <grocery-input v-if="adding" @add="saveItem"></grocery-input>
         <button v-else @click="setAdding(true)">Add grocery</button>
     </div>
 </template>
@@ -11,9 +11,12 @@
 import GroceryList from './components/GroceryList';
 import GroceryInput from './components/GroceryInput';
 import GrocerySearch from './components/GrocerySearch';
-import { mapState, mapMutations } from 'vuex';
-
+import { mapState, mapMutations, mapActions } from 'vuex';
+ 
 export default {
+    mounted() {
+        this.load();
+    },
 
     computed: {
         orderedItems() {
@@ -39,10 +42,14 @@ export default {
     },
 
     methods: {
+        ...mapActions([
+            'load',
+            'saveItem',
+            'deleteItem'
+        ]),
+
         ...mapMutations([
             'setAdding',
-            'addItem',
-            'deleteItem'
         ]),
     },
 

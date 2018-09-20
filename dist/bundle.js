@@ -8927,38 +8927,106 @@ var index_esm = {
   createNamespacedHelpers: createNamespacedHelpers
 };
 
+function promisifyRequest(request) {
+    return new Promise((resolve, reject) => {
+        request.onsuccess = (e) => {
+            resolve(e.target.result);
+        };
+
+        request.onerror = (e) => {
+            reject(e);
+        };
+    });
+}
+
+class Api {
+    constructor() {
+        this.init = new Promise((resolve, reject) => {
+            const request = window.indexedDB.open('groceries', 1);
+            request.onupgradeneeded = (e) => {
+                const db = e.target.result;
+                db.createObjectStore('groceries', { keyPath: 'id', autoIncrement: true });
+            };
+
+            request.onsuccess = (e) => {
+                this.db = e.target.result;
+                resolve(this.db);
+            };
+        });
+    }
+
+    load() {
+        return this.init
+            .then(db => {
+                const objectStore = db.transaction(['groceries'], 'readonly').objectStore('groceries');
+                return promisifyRequest(objectStore.getAll());
+            });
+    }
+
+    addItem(item) {
+        return this.init
+            .then(db => {
+                const objectStore = db.transaction(['groceries'], 'readwrite').objectStore('groceries');
+                return promisifyRequest(objectStore.put(item));
+            })
+    }
+
+    deleteItem(id) {
+        return this.init
+            .then(db => {
+                const objectStore = this.db.transaction(['groceries'], 'readwrite').objectStore('groceries');
+                return promisifyRequest(objectStore.delete(id));
+            });
+    }
+}
+
+var api = new Api();
+
 var store = new index_esm.Store({
     modules: {
         groceries: {
             state: {
-                items: [
-                    {
-                        id: 0,
-                        name: 'Milk',
-                    },
-    
-                    {
-                        id: 1,
-                        name: 'Bread',
-                    }
-                ],
+                items: [],
                 adding: false,
                 orderByName: false,
             },
 
+            actions: {
+                load({ commit }) {
+                    api.load()
+                        .then(items => {
+                            commit('setItems', items);
+                        });
+                },
+
+                saveItem({ commit }, text) {
+                    const data = { name: text };
+
+                    api.addItem(data)
+                        .then(id => {
+                            commit('addItem', Object.assign(data, { id }));
+                        });
+                },
+
+                deleteItem({ commit }, id) {
+                    api.deleteItem(id)
+                        .then(() => {
+                            commit('deleteItem', id);
+                        }); 
+                }
+            },
+
             mutations: {
+                setItems(state, items) {
+                    state.items = items;
+                },
+
                 setAdding(state, value) {
                     state.adding = value;
                 },
 
-                addItem(state, text) {
-                    if(!text) {
-                        return;
-                    }
-                    state.items.push({
-                        id: state.items.length,
-                        name: text,
-                    });
+                addItem(state, item) {
+                    state.items.push(item);
                 },
 
                 deleteItem(state, id) {
@@ -8968,7 +9036,7 @@ var store = new index_esm.Store({
                 toggleOrderByName(state, value) {
                     state.orderByName = value;
                 }
-            }
+            },
         },
     }
 });
@@ -9713,8 +9781,11 @@ __vue_render__$3._withStripped = true;
   );
 
 //
-
+ 
 var script$4 = {
+    mounted() {
+        this.load();
+    },
 
     computed: {
         orderedItems() {
@@ -9740,10 +9811,14 @@ var script$4 = {
     },
 
     methods: {
+        ...mapActions([
+            'load',
+            'saveItem',
+            'deleteItem'
+        ]),
+
         ...mapMutations([
             'setAdding',
-            'addItem',
-            'deleteItem'
         ]),
     },
 
@@ -9810,7 +9885,7 @@ var __vue_render__$4 = function() {
       }),
       _vm._v(" "),
       _vm.adding
-        ? _c("grocery-input", { on: { add: _vm.addItem } })
+        ? _c("grocery-input", { on: { add: _vm.saveItem } })
         : _c(
             "button",
             {
@@ -9832,7 +9907,7 @@ __vue_render__$4._withStripped = true;
   /* style */
   const __vue_inject_styles__$4 = function (inject) {
     if (!inject) return
-    inject("data-v-d799cef6_0", { source: "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", map: {"version":3,"sources":[],"names":[],"mappings":"","file":"App.vue"}, media: undefined });
+    inject("data-v-0b684e39_0", { source: "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", map: {"version":3,"sources":[],"names":[],"mappings":"","file":"App.vue"}, media: undefined });
 
   };
   /* scoped */
@@ -9974,3 +10049,4 @@ const app = new Vue({
 app.$mount('.app');
 
 Vue.config.devtools = true;
+//# sourceMappingURL=bundle.js.map
