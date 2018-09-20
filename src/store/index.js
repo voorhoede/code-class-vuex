@@ -27,11 +27,9 @@ export default new Vuex.Store({
                         });
                 },
 
+                
                 deleteItem({ commit }, id) {
-                    api.deleteItem(id)
-                        .then(() => {
-                            commit('deleteItem', id);
-                        }); 
+                    // implement deleteItem. Use api.deleteItem
                 }
             },
 

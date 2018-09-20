@@ -9008,11 +9008,9 @@ var store = new index_esm.Store({
                         });
                 },
 
+                
                 deleteItem({ commit }, id) {
-                    api.deleteItem(id)
-                        .then(() => {
-                            commit('deleteItem', id);
-                        }); 
+                    // implement deleteItem. Use api.deleteItem
                 }
             },
 
@@ -9811,11 +9809,19 @@ var script$4 = {
     },
 
     methods: {
-        ...mapActions([
-            'load',
-            'saveItem',
-            'deleteItem'
-        ]),
+        //replace the load, deleteItem and saveItem methods by actions using mapActions
+
+        load() {
+
+        },
+
+        deleteItem() {
+
+        },
+
+        saveItem() {
+
+        },
 
         ...mapMutations([
             'setAdding',
@@ -9907,7 +9913,7 @@ __vue_render__$4._withStripped = true;
   /* style */
   const __vue_inject_styles__$4 = function (inject) {
     if (!inject) return
-    inject("data-v-0b684e39_0", { source: "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", map: {"version":3,"sources":[],"names":[],"mappings":"","file":"App.vue"}, media: undefined });
+    inject("data-v-7750b796_0", { source: "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", map: {"version":3,"sources":[],"names":[],"mappings":"","file":"App.vue"}, media: undefined });
 
   };
   /* scoped */

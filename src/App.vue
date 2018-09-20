@@ -42,11 +42,19 @@ export default {
     },
 
     methods: {
-        ...mapActions([
-            'load',
-            'saveItem',
-            'deleteItem'
-        ]),
+        //replace the load, deleteItem and saveItem methods by actions using mapActions
+
+        load() {
+
+        },
+
+        deleteItem() {
+
+        },
+
+        saveItem() {
+
+        },
 
         ...mapMutations([
             'setAdding',
