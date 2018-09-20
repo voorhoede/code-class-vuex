@@ -31,7 +31,7 @@ export default {
     },
 
     methods: {
-        //replace the onClickAdd, onAdd and onDeleteItem methods by mutations
+        //replace the onAdd and onDeleteItem methods by mutations
         //bonus: convert the order by name functionality to a mutation :-)
         ...mapMutations([]),
 
