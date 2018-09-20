@@ -12,19 +12,12 @@ export default new Vuex.Store({
 
             actions: {
                 load({ commit }) {
-                    api.load()
-                        .then(items => {
-                            commit('setItems', items);
-                        });
+                    // implement load. Use api.load
                 },
 
                 saveItem({ commit }, text) {
                     const data = { name: text };
-
-                    api.addItem(data)
-                        .then(id => {
-                            commit('addItem', Object.assign(data, { id }));
-                        });
+                    //implement saveItem. Use api.addItem. Note that addItem returns a promise with the id of the saved item.
                 },
 
                 
