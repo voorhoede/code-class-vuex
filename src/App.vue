@@ -41,6 +41,9 @@ export default {
         },
 
         //use mapState to get items, adding and orderByName from the store
+        ...mapState({
+
+        }),
     },
 
     methods: {
