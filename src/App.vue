@@ -1,5 +1,6 @@
 <template>
     <div>
+        <h1>Awesome Grocery List</h1>
         <input type="checkbox" v-model="orderByName"> Order by name<br>
         <grocery-list @deleteItem="deleteItem" :items="orderedItems"></grocery-list>
         <grocery-input v-if="adding" @add="addItem"></grocery-input>
