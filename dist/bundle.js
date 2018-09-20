@@ -9946,3 +9946,4 @@ const app = new Vue({
 app.$mount('.app');
 
 Vue.config.devtools = true;
+//# sourceMappingURL=bundle.js.map
